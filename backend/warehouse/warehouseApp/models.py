@@ -36,3 +36,6 @@ class Product(Base):
     name = models.CharField(max_length=25, unique=True, blank=True)
     quantity = models.IntegerField(default=0)
     photo = models.ImageField(upload_to='warehouseMedia')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=False)
+    position = models.ForeignKey(Position, on_delete=models.CASCAD, null=False)
+    type = models.ForeignKey(ProductType, on_delete=models.CASCAD, null=False)
