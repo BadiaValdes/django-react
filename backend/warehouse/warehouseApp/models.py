@@ -37,5 +37,5 @@ class Product(Base):
     quantity = models.IntegerField(default=0)
     photo = models.ImageField(upload_to='warehouseMedia')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=False)
-    position = models.ForeignKey(Position, on_delete=models.CASCAD, null=False)
-    type = models.ForeignKey(ProductType, on_delete=models.CASCAD, null=False)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, null=False)
+    type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=False)
