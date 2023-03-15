@@ -7,7 +7,7 @@ def generate_primary_key():
     return uuid.uuid4().hex
 
 class Base(models.Model):
-    id = models.CharField(primary_key=True, default=generate_primary_key, unique=True)
+    id = models.CharField(primary_key=True, default=generate_primary_key, unique=True, max_length=40)
     name = models.CharField(max_length=25, unique=True, blank=True)
 
     class Meta:
