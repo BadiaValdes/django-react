@@ -1,4 +1,30 @@
 {% extends '../layout.html' %}
 {% block content %}
-<h4>List Page</h4>
+    <h4>List Page</h4>
+    {{ name }}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for brand in brands %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ brand.id }}</td>
+                {% if brand.name == "Adidas" %}
+                <td>No Adidas</td>
+                {% else %}
+                <td>{{ brand.name }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
 {% endblock %}
