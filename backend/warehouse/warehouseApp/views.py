@@ -8,12 +8,14 @@ def index(request):
 createIt = False
 # Listar las marcas mediante un metodo
 def list(request):
-    if createIt:
-        Brand.objects.create(name="Adidas")
+    if createIt: # Esto lo ponemos para crear solo una vez los datos de prueba
+        Brand.objects.create(name="Adidas") # Nos permite crear datos en la base de datos
         Brand.objects.create(name="Nike")
         Brand.objects.create(name="Converse")
         Brand.objects.create(name="Vans")
-    brand = Brand.objects.all();
+    brand = Brand.objects.all() # Nos permite obtener todos los datos de un objeto en la base de datos
+
+    # Variable encargada de almacenar los datos a utilizar en la plantilla.
     context = {
         'name': 'Eduardo',
         'brands': brand
@@ -33,5 +35,6 @@ class listGeneric(generic.ListView):
         context = super().get_context_data(**kwargs) # Creamos la variable contexto y le asignamos todos los datos que ya existían en la clase padre (brand.objects.all)
         context['name']='Bruno' # añado un valor nuevo al contexto
         return context # retorno el contexto
+
 def create(request):
     return render(request, 'pages/create.html')
