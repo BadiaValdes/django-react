@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'partial/_css.html' %}
+    {% include 'partial/_js.html' %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Almacen</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="height: 87vh">
+    <h3>Prueba</h3>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+
+<footer style="text-align: center; background-color: black; color: white; width: 100%">
+    Curso de Django X React 2023
+</footer>
+
+</body>
+</html>
