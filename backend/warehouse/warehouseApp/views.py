@@ -36,5 +36,9 @@ class listGeneric(generic.ListView):
         context['name']='Bruno' # añado un valor nuevo al contexto
         return context # retorno el contexto
 
-def create(request):
+
+class CreateView (generic.CreateView):
+    model = Brand
+
+def createz(request):
     return render(request, 'pages/create.html')
