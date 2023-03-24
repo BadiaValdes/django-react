@@ -5,6 +5,9 @@ from ..models import Brand
 from django.views import generic
 from ..forms import formsBrand
 
+# INDEX
+def index(request):
+    return render(request, 'index.html')
 
 # Basada en método
 def list(request):
@@ -74,7 +77,7 @@ class updateBrand(generic.UpdateView):
 def delete(request, pk):
     if request.method == 'GET':
         brand = get_object_or_404(Brand, id=pk)
-        brand.delete();
+        brand.delete()
         return redirect(reverse_lazy('brand_list'))
 
 
@@ -88,6 +91,7 @@ class brandDelete(generic.DeleteView):
 def detail(request, pk):
     if request.method == 'GET':
         brand = get_object_or_404(Brand, id=pk)
+        print(brand.name)
         return render(request, 'pages/brand/details.html', {'brand': brand})
 
 class brandDetails(generic.DetailView):

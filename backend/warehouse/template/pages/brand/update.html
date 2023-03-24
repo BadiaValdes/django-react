@@ -2,23 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div style="margin: 0 auto; width: 80%;">
-        <h4>Crear marca</h4>
-        <h5>Mediante funcion</h5>
-        <form style="flex: auto; flex-direction: column;" action="{% url 'update_function' pk %}" method="POST">
+        <h4>Modificar marca</h4>
+        <form style="flex: auto; flex-direction: column;" action="{% url 'brand_update' brand.id %}" method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="exampleInputEmail1">Nombre:</label>
-                <input type="text" class="form-control" id="name" value="{{ brand.name }}" name="name" aria-describedby="brandName"
-                       placeholder="Ingrese el nombre">
-            </div>
-
+            {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <h5 style="margin-top: 15px">Mediante clase</h5>
-    <form  style="flex: auto; flex-direction: column;" action="{% url 'brand_update' brand.id %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
     </div>
 {% endblock %}
