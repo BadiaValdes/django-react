@@ -2,8 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div style="margin: 0 auto; width: 80%;">
-        <h4>Modificar posicion</h4>
-        <h5 style="margin-top: 15px">Mediante clase</h5>
+        <h4>Modificar tipo de producto</h4>
         <form style="flex: auto; flex-direction: column;" action="{% url 'productType_update' productType.id %}"
               method="post">
             {% csrf_token %}

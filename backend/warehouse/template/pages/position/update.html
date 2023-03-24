@@ -3,8 +3,8 @@
 {% block content %}
     <div style="margin: 0 auto; width: 80%;">
         <h4>Modificar posicion</h4>
-        <h5 style="margin-top: 15px">Mediante clase</h5>
-        <form style="flex: auto; flex-direction: column;" action="{% url 'position_update' position.id %}" method="post">
+        <form style="flex: auto; flex-direction: column;" action="{% url 'position_update' position.id %}"
+              method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Submit</button>
