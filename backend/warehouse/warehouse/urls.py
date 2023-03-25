@@ -22,7 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('warehouseApp.url'))
+    path('', include('warehouseApp.url')),
+    path('api/', include('warehouseApp.API.url')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 # Añadir archivos estáticos a la url

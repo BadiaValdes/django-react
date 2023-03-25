@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'dal',
     'dal_select2',
+    'rest_framework',
+    'django_filters',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +53,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'warehouse.urls'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 TEMPLATES = [
     {
