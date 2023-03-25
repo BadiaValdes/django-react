@@ -1,4 +1,4 @@
-from .auxView import brand, position, producType
+from .auxView import brand, position, producType, dal, product
 from django.urls import path, re_path
 
 urlpatterns = [
@@ -37,4 +37,17 @@ urlpatterns = [
     re_path('type/update/(?P<pk>[0-9a-f]{32})', producType.updateView.as_view(), name='productType_update'),
     re_path('type/delete/(?P<pk>[0-9a-f]{32})', producType.deleteView.as_view(), name='productType_delete'),
     re_path('type/(?P<pk>[0-9a-f]{32})', producType.detailsView.as_view(), name='productType_details'),
+
+    # Product
+    path('product/', product.ListGeneric.as_view(), name='product_list'),
+    path('product/create', product.CreateView.as_view(), name='product_create'),
+    re_path('product/update/(?P<pk>[0-9a-f]{32})', product.UpdateView.as_view(), name='product_update'),
+    re_path('product/delete/(?P<pk>[0-9a-f]{32})', product.DeleteView.as_view(), name='product_delete'),
+    re_path('product/details/(?P<pk>[0-9a-f]{32})', product.DetailsView.as_view(), name='product_details'),
+
+
+    # DAL
+    path('dal/brand', dal.ABrand.as_view(create_field='brand'), name='dal_brand'),
+    path('dal/position', dal.APosition.as_view(create_field='position'), name='dal_position'),
+    path('dal/productType', dal.AProductType.as_view(), name='dal_productType')
 ]

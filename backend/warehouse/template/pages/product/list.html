@@ -1,0 +1,31 @@
+{% extends '../../layout.html' %}
+{% load static %}
+{% block content %}
+    <h4>List Page</h4>
+    <a href="{% url 'product_create' %}" class="btn btn-dark">Añadir</a>
+
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+        {% for object in objects %}
+            <div class="card" style="width: 18rem; padding: 25px">
+                <img src="{{ object.photo.url }}">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.name }}</h5>
+                    <p class="card-text">{{ object.type.name }}</p>
+                    <div>
+                        <a class="btn btn-warning" href="{% url 'product_update' object.id %}"><i
+                                class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" href="{% url 'product_delete' object.id %}"><i
+                                class="bi bi-trash"></i></a>
+                        <a class="btn btn-info" href="{% url 'product_details' object.id %}"><i
+                                class="bi bi-eye"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

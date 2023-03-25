@@ -1,0 +1,11 @@
+{% extends '../../layout.html' %}
+{% block content %}
+    <div style="display: flex; flex-direction: column; align-content: center; align-items: center; align-self: center">
+        <h3>Datos del producto</h3>
+        <img src="{{ object.photo.url }}" style="width: 20%">
+        <h4>Cantidad: {{ object.quantity }}</h4>
+        <h4>Ubicacion: {{ object.position.name }}</h4>
+        <h4>Marca: {{ object.brand }}</h4>
+        <h4>Tipo: {{ object.type }}</h4>
+    </div>
+{% endblock %}

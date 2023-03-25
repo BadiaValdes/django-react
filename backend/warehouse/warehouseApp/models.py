@@ -6,6 +6,7 @@ from django.db import models
 def generate_primary_key():
     return uuid.uuid4().hex
 
+
 class Base(models.Model):
     id = models.CharField(primary_key=True, default=generate_primary_key, unique=True, max_length=40)
     name = models.CharField(max_length=25, unique=True, blank=True)
@@ -37,3 +38,6 @@ class Product(Base):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=False)
     position = models.ForeignKey(Position, on_delete=models.CASCADE, null=False)
     type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=False)
+
+    def __str__(self):
+        return self.name
