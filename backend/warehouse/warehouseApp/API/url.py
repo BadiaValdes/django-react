@@ -17,5 +17,7 @@ urlpatterns = [
 
     # Product
     path('product', ProductController.product_list, name='product_list'),
-
+    path('productApi', ProductController.ProductAPI.as_view(), name='product_api_list'),
+    re_path('productApi/(?P<pk>[0-9a-f]{32})', ProductController.ProductAPID.as_view(),
+            name='product_api_detail'),
 ]
