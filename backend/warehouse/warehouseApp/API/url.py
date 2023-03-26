@@ -1,5 +1,10 @@
 from .Controllers import BrandController, ProductController, PositionController, TypeController
-from django.urls import path, re_path
+from django.urls import path, re_path, include
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'productApiV', ProductController.ProductView, basename='productApiV')
+router.register(r'productApiVM', ProductController.ProductModelViwe, basename='productApiVM')
 
 urlpatterns = [
     # Brand
@@ -20,4 +25,11 @@ urlpatterns = [
     path('productApi', ProductController.ProductAPI.as_view(), name='product_api_list'),
     re_path('productApi/(?P<pk>[0-9a-f]{32})', ProductController.ProductAPID.as_view(),
             name='product_api_detail'),
+
+    path('productGLC/', ProductController.ProductGLC.as_view(), name='product_api_g'),
+    re_path('productGRUD/(?P<pk>[0-9a-f]{32})', ProductController.ProductGURD.as_view(), name='product_api_gurd'),
+
+    # GENERIC Product
+
+    path('', include(router.urls))
 ]
