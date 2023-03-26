@@ -7,9 +7,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import {pages} from "./layout";
+import {pages} from "../config/menu-item";
+import {useNavigate} from "react-router-dom";
 
 function NavBar(props) {
+    const navigate = useNavigate()
+    const nav = (value) => navigate(value)
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
@@ -25,19 +29,18 @@ function NavBar(props) {
                                 md: 'none',
                             }
                         }}
-
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h5" component="div" style={{'padding-right': '12px',}}>
+                    <Typography variant="h5" component="div" style={{'paddingRight': '12px',}}>
                         Curso Django React
                     </Typography>
-                    <Box style={{'display': 'flex', 'flex-direction': 'row', 'flex-grow': '1'}}>
+                    <Box style={{'display': 'flex', 'flexDirection': 'row', 'flexGrow': '1'}}>
                         {
                             pages.map(page => (
-                                <MenuItem key={page} style={{'border-radius': '10px'}}>
+                                <MenuItem key={page} style={{'borderRadius': '10px'}} onClick={() => nav(page.link)}>
                                     <Typography>
-                                        {page.title}
+                                        {page['title']}
                                     </Typography>
                                 </MenuItem>
                             ))

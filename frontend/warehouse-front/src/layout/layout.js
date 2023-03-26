@@ -15,32 +15,15 @@ import AdbIcon from '@mui/icons-material/Adb';
 import NavBar from "./nav-bar";
 import {Outlet} from "react-router-dom";
 import Footer from "./footer";
-
-export const pages = [{
-    title: 'Marca',
-    link: '/brand',
-    icon: ''
-}, {
-    title: 'Tipo de prodcuto',
-    link: '/type',
-    icon: ''
-}, {
-    title: 'Posicion',
-    link: '/position',
-    icon: ''
-},
-    {
-        title: 'Producto',
-        link: '/product',
-        icon: ''
-    }
-]
+import {CustomTable} from "../components/table/custom-table"
+import {tableHeaderValues, tableTestValues} from "../config/table-values"
+import BrandList from "../components/brand/brand-list";
 
 function Layout(props) {
     return (
         <>
             <NavBar/>
-            <Box style={{'min-height': '87vh', 'margin': '0 auto', 'width': '80%'}}>
+            <Box style={{'minHeight': '87vh', 'margin': '0 auto', 'width': '80%'}}>
                 <Outlet/>
             </Box>
             <Footer/>
