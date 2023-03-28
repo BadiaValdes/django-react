@@ -1,26 +1,27 @@
+import axios from "axios";
+import {httpLink} from "../config/http";
 
 export class BrandService {
-    static tableTestValues = [{
-        id: '324',
-        name: 'Test 1',
-    }]
-
     static get(){
-        return BrandService.tableTestValues;
+        return axios.get(httpLink + 'brand');
     }
 
-    static create(data) {
-        BrandService.tableTestValues.push(data)
+    static retrive(id){
+        return axios.get(httpLink + 'brand/' + id);
     }
-    static update(data) {
-        BrandService.tableTestValues = BrandService.tableTestValues.map(dat => {
-            if(dat.id == data.id){
-                dat.name = data.name
-            }
-            return dat
+
+    static create(name) {
+        return axios.post(httpLink + 'brand', {
+            name: name
         })
     }
+    static update(data) {
+       return axios.put(httpLink + 'brand/' + data.id, {
+           id: data.id,
+           name: data.name
+       })
+    }
     static delete(id) {
-        BrandService.tableTestValues = BrandService.tableTestValues.filter(dat => dat.id !== id)
+        return axios.delete(httpLink + 'brand/' + id)
     }
 }

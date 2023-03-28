@@ -5,12 +5,15 @@ import BrandForm from "./brand-form";
 import Button from "@mui/material/Button";
 import {BrandService} from "../../service/brand.service";
 import Typography from "@mui/material/Typography";
+import AlertDialog from "../confirm-dialog/confirm";
 
 function BrandList(props) {
     // useSate es un hook que nos permite cambiar los estados de variables en específico
     const [data, setData] = useState([])
     const [test, setTest] = useState({id: '', name: ''})
     const [showForm, setShowForm] = useState(false)
+    const [showConfirm, setShowConfirm] = useState(false)
+    const [deleteId, setDeleteId] = useState('')
 
     const header = tableHeaderValues
     // useEffect es un hook que nos permite realizar una acción cuando el componente se inicio
@@ -21,12 +24,13 @@ function BrandList(props) {
     }, [])
 
     const editFunction = (id) => {
-        const value = BrandService.tableTestValues.filter(dat => dat.id == id)[0]
-        setTest({
-            id: value.id,
-            name: value.name
+        BrandService.retrive(id).then((data) => {
+            setTest({
+                id: data.data.id,
+                name: data.data.name
+            })
+            setShowForm(true);
         })
-        setShowForm(true);
     }
 
     const cleanEdit = () => {
@@ -34,8 +38,12 @@ function BrandList(props) {
     }
 
     const deleteFunction = (id) => {
-        BrandService.delete(id)
-        reloadData()
+        setDeleteId(id)
+        setShowConfirm(true)
+    }
+
+    const del = () => {
+        BrandService.delete(deleteId).then(() => reloadData())
     }
 
     const seeFunction = (id) => {
@@ -43,13 +51,18 @@ function BrandList(props) {
     }
 
     const reloadData = () => {
-        setData(BrandService.get())
+        console.log("HERE")
+        BrandService.get().then(data => {
+            console.log(data.data)
+            setData(data.data)
+        })
+
     }
 
 
     return (
         <>
-            <Typography  variant="h5"  component={'h4'}>
+            <Typography variant="h5" component={'h4'}>
                 Marca
             </Typography>
             {showForm
@@ -58,17 +71,23 @@ function BrandList(props) {
                               data={test}
                               clean={cleanEdit}
                               reloadData={reloadData}/>}
+            {showConfirm &&
+                <AlertDialog
+                    deleteAction={del}
+                    setConfirm={setShowConfirm}
+                    confirm={showConfirm}
+            />}
             <Button onClick={() => {
                 cleanEdit();
                 setShowForm(true);
             }}> Crear </Button>
 
             <CustomTable
-                data={BrandService.get()}
+                data={data}
                 header={header}
                 editFunction={editFunction}
                 deleteFunction={deleteFunction}
-                />
+            />
         </>
     );
 }

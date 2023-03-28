@@ -11,6 +11,7 @@ django-crispy-forms = "*"
 django-autocomplete-light = {editable = true, git = "https://github.com/yourlabs/django-autocomplete-light.git"}
 djangorestframework = "*"
 django-filter = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

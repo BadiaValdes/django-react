@@ -5,12 +5,16 @@ import TypeForm from "./type-form";
 import Button from "@mui/material/Button";
 import {TypeService} from "../../service/type.service";
 import Typography from "@mui/material/Typography";
+import PositionForm from "../position/position-form";
+import AlertDialog from "../confirm-dialog/confirm";
 
 function TypeList(props) {
     // useSate es un hook que nos permite cambiar los estados de variables en específico
     const [data, setData] = useState([])
     const [test, setTest] = useState({id: '', name: ''})
     const [showForm, setShowForm] = useState(false)
+    const [showConfirm, setShowConfirm] = useState(false)
+    const [deleteId, setDeleteId] = useState('')
 
     const header = tableHeaderValues
     // useEffect es un hook que nos permite realizar una acción cuando el componente se inicio
@@ -21,12 +25,14 @@ function TypeList(props) {
     }, [])
 
     const editFunction = (id) => {
-        const value = TypeService.tableTestValues.filter(dat => dat.id == id)[0]
-        setTest({
-            id: value.id,
-            name: value.name
+        TypeService.retrive(id).then((data) => {
+            console.log(data)
+            setTest({
+                id: data.data.id,
+                name: data.data.name
+            })
+            setShowForm(true);
         })
-        setShowForm(true);
     }
 
     const cleanEdit = () => {
@@ -34,8 +40,12 @@ function TypeList(props) {
     }
 
     const deleteFunction = (id) => {
-        TypeService.delete(id)
-        reloadData()
+        setDeleteId(id)
+        setShowConfirm(true)
+    }
+
+    const del = () => {
+        TypeService.delete(deleteId).then(() => reloadData())
     }
 
     const seeFunction = (id) => {
@@ -43,7 +53,9 @@ function TypeList(props) {
     }
 
     const reloadData = () => {
-        setData(TypeService.get())
+        TypeService.get().then((data) => setData(data.data
+            )
+        )
     }
 
 
@@ -54,17 +66,23 @@ function TypeList(props) {
             </Typography>
             {showForm
                 && <TypeForm dialogState={showForm}
-                             setDialogState={setShowForm}
-                             data={test}
-                             clean={cleanEdit}
-                             reloadData={reloadData}/>}
+                                 setDialogState={setShowForm}
+                                 data={test}
+                                 clean={cleanEdit}
+                                 reloadData={reloadData}/>}
+            {showConfirm &&
+                <AlertDialog
+                    deleteAction={del}
+                    setConfirm={setShowConfirm}
+                    confirm={showConfirm}
+                />}
             <Button onClick={() => {
                 cleanEdit();
                 setShowForm(true);
             }}> Crear </Button>
 
             <CustomTable
-                data={TypeService.get()}
+                data={data}
                 header={header}
                 editFunction={editFunction}
                 deleteFunction={deleteFunction}

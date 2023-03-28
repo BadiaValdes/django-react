@@ -9,15 +9,15 @@ router.register(r'productApiVM', ProductController.ProductModelViwe, basename='p
 urlpatterns = [
     # Brand
     path('brand', BrandController.BrandList.as_view(), name='brand_list'),
-    re_path('brand/detail/(?P<pk>[0-9a-f]{32})', BrandController.BrandDetails.as_view(), name='brand_detail'),
+    re_path('brand/(?P<pk>[0-9a-f]{32})', BrandController.BrandDetails.as_view(), name='brand_detail'),
 
     # Type
     path('type', TypeController.ProductTypeList.as_view(), name='type_list'),
-    re_path('type/detail/(?P<pk>[0-9a-f]{32})', TypeController.ProductTypeDetails.as_view(), name='type_detail'),
+    re_path('type/(?P<pk>[0-9a-f]{32})', TypeController.ProductTypeDetails.as_view(), name='type_detail'),
 
     # Position
     path('position', PositionController.PositionList.as_view(), name='position_list'),
-    re_path('position/detail/(?P<pk>[0-9a-f]{32})', PositionController.PositionDetails.as_view(),
+    re_path('position/(?P<pk>[0-9a-f]{32})', PositionController.PositionDetails.as_view(),
             name='position_detail'),
 
     # Product
@@ -26,7 +26,7 @@ urlpatterns = [
     re_path('productApi/(?P<pk>[0-9a-f]{32})', ProductController.ProductAPID.as_view(),
             name='product_api_detail'),
 
-    path('productGLC/', ProductController.ProductGLC.as_view(), name='product_api_g'),
+    path('productGLC', ProductController.ProductGLC.as_view(), name='product_api_g'),
     re_path('productGRUD/(?P<pk>[0-9a-f]{32})', ProductController.ProductGURD.as_view(), name='product_api_gurd'),
 
     # GENERIC Product

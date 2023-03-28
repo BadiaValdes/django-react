@@ -3,6 +3,7 @@ import Layout from "../layout/layout";
 import BrandList from "../components/brand/brand-list";
 import PositionList from "../components/position/position-list";
 import TypeList from "../components/type/type-list";
+import ProductList from "../components/product/product-list";
 
 export const route = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ export const route = createBrowserRouter([
             },
             {
                 path: "product/",
-                element: <div>Inside Product</div>,
+                element: <ProductList/>,
 
             },
             {

@@ -9,23 +9,25 @@ function PositionForm(props) {
     const [name, setName] = useState('')
 
     useEffect(() => {
-        if(props.data.id != ''){
+        if (props.data.id != '') {
             setName(props.data.name)
         }
     }, [])
 
     const createBrand = () => {
-        const data = {
-            id: props.data.id ? props.data.id : '123',
-            name: name
-        }
-        if(props.data.id == '') {
-            PositionService.create(data)
+
+        if (props.data.id == '') {
+            PositionService.create(name).then(() => props.reloadData()
+            )
         } else {
-            PositionService.update(data)
+            const data = {
+                id: props.data.id,
+                name: name
+            }
+            PositionService.update(data).then(() => props.reloadData()
+            )
             props.clean()
         }
-        props.reloadData()
         hide()
     }
 

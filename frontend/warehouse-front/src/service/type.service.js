@@ -1,26 +1,27 @@
+import axios from "axios";
+import {httpLink} from "../config/http";
 
 export class TypeService {
-    static tableTestValues = [{
-        id: '324',
-        name: 'Test 1',
-    }]
-
     static get(){
-        return TypeService.tableTestValues;
+        return axios.get(httpLink + 'type');
     }
 
-    static create(data) {
-        TypeService.tableTestValues.push(data)
+    static retrive(id){
+        return axios.get(httpLink + 'type/' + id);
+    }
+
+    static create(name) {
+        return axios.post(httpLink + 'type', {
+            name: name
+        })
     }
     static update(data) {
-        TypeService.tableTestValues = TypeService.tableTestValues.map(dat => {
-            if(dat.id == data.id){
-                dat.name = data.name
-            }
-            return dat
+        return axios.put(httpLink + 'type/' + data.id, {
+            id: data.id,
+            name: data.name
         })
     }
     static delete(id) {
-        TypeService.tableTestValues = TypeService.tableTestValues.filter(dat => dat.id !== id)
+        return axios.delete(httpLink + 'type/' + id)
     }
 }

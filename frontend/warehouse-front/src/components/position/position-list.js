@@ -5,12 +5,16 @@ import PositionForm from "./position-form";
 import Button from "@mui/material/Button";
 import {PositionService} from "../../service/position.service";
 import Typography from "@mui/material/Typography";
+import {BrandService} from "../../service/brand.service";
+import AlertDialog from "../confirm-dialog/confirm";
 
 function PositionList(props) {
     // useSate es un hook que nos permite cambiar los estados de variables en específico
     const [data, setData] = useState([])
     const [test, setTest] = useState({id: '', name: ''})
     const [showForm, setShowForm] = useState(false)
+    const [showConfirm, setShowConfirm] = useState(false)
+    const [deleteId, setDeleteId] = useState('')
 
     const header = tableHeaderValues
     // useEffect es un hook que nos permite realizar una acción cuando el componente se inicio
@@ -21,12 +25,14 @@ function PositionList(props) {
     }, [])
 
     const editFunction = (id) => {
-        const value = PositionService.tableTestValues.filter(dat => dat.id == id)[0]
-        setTest({
-            id: value.id,
-            name: value.name
+        PositionService.retrive(id).then((data) => {
+            console.log(data)
+            setTest({
+                id: data.data.id,
+                name: data.data.name
+            })
+            setShowForm(true);
         })
-        setShowForm(true);
     }
 
     const cleanEdit = () => {
@@ -34,8 +40,12 @@ function PositionList(props) {
     }
 
     const deleteFunction = (id) => {
-        PositionService.delete(id)
-        reloadData()
+        setDeleteId(id)
+        setShowConfirm(true)
+    }
+
+    const del = () => {
+        PositionService.delete(deleteId).then(() => reloadData())
     }
 
     const seeFunction = (id) => {
@@ -43,7 +53,9 @@ function PositionList(props) {
     }
 
     const reloadData = () => {
-        setData(PositionService.get())
+        PositionService.get().then((data) => setData(data.data
+            )
+        )
     }
 
 
@@ -58,13 +70,19 @@ function PositionList(props) {
                                  data={test}
                                  clean={cleanEdit}
                                  reloadData={reloadData}/>}
+            {showConfirm &&
+                <AlertDialog
+                    deleteAction={del}
+                    setConfirm={setShowConfirm}
+                    confirm={showConfirm}
+                />}
             <Button onClick={() => {
                 cleanEdit();
                 setShowForm(true);
             }}> Crear </Button>
 
             <CustomTable
-                data={PositionService.get()}
+                data={data}
                 header={header}
                 editFunction={editFunction}
                 deleteFunction={deleteFunction}
