@@ -2,7 +2,6 @@ import uuid
 
 from django.db import models
 
-
 def generate_primary_key():
     return uuid.uuid4().hex
 
