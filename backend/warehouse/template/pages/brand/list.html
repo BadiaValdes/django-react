@@ -1,0 +1,38 @@
+{% extends '../../layout.html' %}
+{% block content %}
+    <h4>List Page</h4>
+    <a href="{% url 'brand_create' %}" class="btn btn-dark">Añadir</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for brand in brands %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ brand.id }}</td>
+                {% if brand.name == "Adidas" %}
+                <td>No Adidas</td>
+                {% else %}
+                <td>{{ brand.name }}</td>
+                {% endif %}
+                <td>
+                    <div style="display: flex;flex: auto; flex-direction: row; width: 50%;">
+                        <a class="btn btn-warning" href="{% url 'update_function' brand.id %}"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" href="{% url 'brand_delete' brand.id %}"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-info" href="{% url 'brand_details' brand.id %}"><i class="bi bi-eye"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
